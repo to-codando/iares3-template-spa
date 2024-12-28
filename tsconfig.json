@@ -1,0 +1,50 @@
+{
+  "compilerOptions": {
+    "rootDir": ".",
+    "baseUrl": "./src",
+    "outDir": "./dist",
+    "declarationDir": "./dist",
+    "lib": ["ESNext", "DOM"],
+    "strict": true,
+    "skipLibCheck": true,
+    "allowJs": false,
+    "noEmitOnError": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "moduleResolution": "node",
+    "forceConsistentCasingInFileNames": true,
+    "target": "es2018",
+    "module": "esnext",
+    "allowSyntheticDefaultImports": true,
+    "importHelpers": true,
+    "declaration": true, // Habilita a geração de arquivos .d.ts
+    "declarationMap": true, // Gera arquivos .map para os arquivos .d.ts
+    "composite": true,
+    "emitDeclarationOnly": true,
+    "paths": {
+      "@/assets/*": ["frontend/public/assets/*"],
+      "@/store": ["frontend/store/index.ts"],
+
+      "@/ui/elements": ["frontend/ui/elements/index.ts"],
+      "@/ui/blocks": ["frontend/ui/blocks/index.ts"],
+      "@/ui/sections": ["frontend/ui/sections/index.ts"],
+      "@/ui/layouts": ["frontend/ui/layouts/index.ts", "../frontend/ui/layouts/index.ts"],
+      "@/ui/pages": ["frontend/ui/pages/index.ts", "../frontend/ui/pages/index.ts"],
+
+      "@/app/adapters": ["frontend/adapters/index.ts"],
+      "@/app/useCases": ["frontend/useCases/index.ts"],
+      "@/app/services": ["frontend/services/index.ts"],
+      "@/app/formatters": ["frontend/formatters/index.ts"],
+      "@/app/validators": ["frontend/validators/index.ts"],
+
+      "@/utils/*": ["frontend/utils/*"],
+      "@/tests/*": ["frontend/tests/*"],
+      "@/mock/*": ["frontend/mock/*"]
+    }
+  },
+
+  "typeRoots": ["./node_modules/@types", "declarations.d.ts"],
+  "types": ["node"],
+  "exclude": ["node_modules", "dist", "config", "api", ".vscode"],
+  "include": ["src/frontend/**/*", "declarations.d.ts", "static"]
+}

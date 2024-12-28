@@ -1,0 +1,59 @@
+:root {
+  --primary-90: #001d25;
+  --primary-80: #00394b;
+  --primary-70: #005670;
+  --primary-60: #007296;
+  --primary-main: #008fbb;
+  --primary-40: #33a5c9;
+  --primary-30: #66bcd6;
+  --primary-20: #99d2e4;
+  --primary-10: #cce9f1;
+  --accent-main: #ff9e05;
+  --accent-lighter: #ffc466;
+  --neutral-80: #272727;
+  --neutral-70: #4d4d4d;
+  --neutral-60: #737373;
+  --neutral-50: #969696;
+  --neutral-40: #b7b7b7;
+  --neutral-30: #c7c7c7;
+  --neutral-20: #dfdfdf;
+  --semantics-wrong: #fb5b47;
+  --semantics-right: #019d6e;
+  --semantics-alert: #ffef5a;
+  --white: #fbfbfb;
+
+  --background: var(--white);
+  --text-color: #101010;
+  --check: #006156;
+
+  --title-ui-color: #000;
+  --title-ui-font-size-primary: 3.6em;
+  --title-ui-font-weight-primary: 600;
+
+  --title-ui-font-size-secondary: 2.2em;
+  --title-ui-font-weight-secondary: 600;
+  --title-ui-line-height-secondary: 3em;
+
+  --title-ui-font-size-tertiary: 1.5em;
+  --title-ui-font-weight-tertiary: bold;
+
+  --button-ui-font-size: 1em;
+  --button-ui-border-width: 3px;
+
+  --button-ui-primary-border-color: var(--text-color);
+  --button-ui-primary-background: var(--accent-lighter);
+  --button-ui-primary-color: var(--text-color);
+
+  --button-ui-primary-hole-border-color: var(--text-color);
+  --button-ui-primary-hole-background: transparent;
+  --button-ui-primary-hole-color: var(--text-color);
+
+  --button-ui-secondary-border-color: var(--text-color);
+  --button-ui-secondary-background: var(--white);
+  --button-ui-secondary-color: var(--text-color);
+
+  --card-ui-background: #fff;
+  --card-ui-color: #c6c6c8;
+
+  --card-ui-border-color: #e4e5e7;
+}
