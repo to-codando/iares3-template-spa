@@ -1,26 +1,51 @@
 import { TimerApp } from "@/ui/elements";
 import { tsx } from "iares";
-import type { GenericObject, TaggedStyle } from "iares";
+import type {
+  GenericObject,
+  State,
+  StateManager,
+  TaggedStyle,
+  TaggedTemplate,
+} from "iares";
 
 type Styles = { HomeApp: string };
 type StyleParams = { css: TaggedStyle };
 
 type StyleHandler = () => GenericObject;
-type UseStyle = (styleHandler: StyleHandler) => Styles;
-type Params = {
-  useStyle: UseStyle;
+
+type TemplateHandlerParams = {
+  state: Model;
 };
 
-export const HomeApp = ({ useStyle }: Params) => {
-  useStyle(createStyles);
+type TemplateHandler = (params: TemplateHandlerParams) => TaggedTemplate;
 
-  return tsx`
+type Model = {
+  title: string;
+};
+
+type UseStyle = (styleHandler: StyleHandler) => Styles;
+type UseTemplate = (templateHandler: TemplateHandler) => TaggedTemplate;
+type UseState = <T = Model>(initialState: T) => StateManager<T>;
+
+type Params = {
+  useState: UseState;
+  useStyle: UseStyle;
+  useTemplate: UseTemplate;
+};
+
+const template = ({ state }: TemplateHandlerParams) =>
+  tsx`
   <div class="wrap">
-    <h1>Home Page</h1>
+    <h1 class="title">${state.title}</h1>
     <span>A simple <b>IARES</b> page template app.</span>
     <${TimerApp} />
   </div>
-`;
+` as TaggedTemplate;
+
+export const HomeApp = ({ useStyle, useTemplate, useState }: Params) => {
+  useState({ title: "Titulo incial da home" });
+  useStyle(createStyles);
+  return useTemplate(template);
 };
 
 const createStyles = () => ({
