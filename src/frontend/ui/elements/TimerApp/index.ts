@@ -1,14 +1,14 @@
 import type {
-  GenericObject,
-  HTMX,
-  State,
-  StateManager,
-  TaggedStyle,
-  TaggedTemplate,
+	GenericObject,
+	HTMX,
+	State,
+	StateManager,
+	TaggedStyle,
+	TaggedTemplate,
 } from "iares";
 
 type Props = {
-  handler: <T = unknown>(params: T) => void;
+	handler: <T = unknown>(params: T) => void;
 };
 
 type Styles = { TimerApp: string; label: string };
@@ -16,23 +16,23 @@ type Styles = { TimerApp: string; label: string };
 type StyleHandler = () => GenericObject;
 
 type Actions = {
-  increment: () => void;
+	increment: () => void;
 };
 
 type Injections = GenericObject<{
-  actions: Actions;
-  styles: Styles;
+	actions: Actions;
+	styles: Styles;
 }>;
 
 type TemplateInjections = () => Injections;
 
 type TemplateHandler = (
-  params: TemplateParams,
-  injections: TemplateInjections,
+	params: TemplateParams,
+	injections: TemplateInjections,
 ) => TaggedTemplate;
 
 type Model = GenericObject<{
-  timeLeft: number;
+	timeLeft: number;
 }>;
 
 type UseState = <T = Model>(initialState: T) => StateManager<T>;
@@ -40,44 +40,44 @@ type UseState = <T = Model>(initialState: T) => StateManager<T>;
 type UseStyle = (styleHandler: StyleHandler) => string;
 
 type UseTemplate = (
-  templateHandler: TemplateHandler,
-  templateinjections?: TemplateInjections,
+	templateHandler: TemplateHandler,
+	templateinjections?: TemplateInjections,
 ) => TaggedTemplate;
 
 type TemplateParams = {
-  state: State<Model>;
-  styles: Styles;
-  html: HTMX;
+	state: State<Model>;
+	styles: Styles;
+	html: HTMX;
 };
 
 type StyleParams = {
-  css: TaggedStyle;
+	css: TaggedStyle;
 };
 
 type Params = {
-  props: Props;
-  useState: UseState;
-  useStyle: UseStyle;
-  useTemplate: UseTemplate;
+	props: Props;
+	useState: UseState;
+	useStyle: UseStyle;
+	useTemplate: UseTemplate;
 };
 
 type Timer = ReturnType<typeof setTimeout>;
 
 type TimerHandlerParams = {
-  state: StateManager<Model>;
-  seconds: number;
+	state: StateManager<Model>;
+	seconds: number;
 };
 
 type StateWatcherHandlerParams = {
-  oneSecond: number;
-  timer: Timer;
+	oneSecond: number;
+	timer: Timer;
 };
 
 const template = (params: TemplateParams): TaggedTemplate => {
-  const { state, styles, html } = params;
-  const timeLeft = Number(state.timeLeft);
+	const { state, styles, html } = params;
+	const timeLeft = Number(state.timeLeft);
 
-  return html`
+	return html`
 
     <div class="timer"> 
       <span>A simple counter</span>
@@ -87,40 +87,40 @@ const template = (params: TemplateParams): TaggedTemplate => {
 };
 
 const createStateHandler = (params: TimerHandlerParams) => {
-  const { state, seconds } = params;
-  return () => {
-    const { timeLeft } = state.get();
-    if (!timeLeft) return;
-    state.set({ timeLeft: timeLeft - seconds });
-  };
+	const { state, seconds } = params;
+	return () => {
+		const { timeLeft } = state.get();
+		if (!timeLeft) return;
+		state.set({ timeLeft: timeLeft - seconds });
+	};
 };
 
 const createStateWatcher =
-  ({ oneSecond, timer }: StateWatcherHandlerParams) =>
-    ({ timeLeft }: Model) => {
-      if (timeLeft < oneSecond) {
-        clearTimeout(timer);
-      }
-    };
+	({ oneSecond, timer }: StateWatcherHandlerParams) =>
+	({ timeLeft }: Model) => {
+		if (timeLeft < oneSecond) {
+			clearTimeout(timer);
+		}
+	};
 
 export const TimerApp = ({ useState, useStyle, useTemplate }: Params) => {
-  const state = useState<Model>({ timeLeft: 120 });
-  useStyle(createStyles);
+	const state = useState<Model>({ timeLeft: 120 });
+	useStyle(createStyles);
 
-  const oneSecond = 1;
-  const cycleTime = 1000;
+	const oneSecond = 1;
+	const cycleTime = 1000;
 
-  const stateHandler = createStateHandler({ state, seconds: oneSecond });
-  const timer = setTimeout(stateHandler, cycleTime);
+	const stateHandler = createStateHandler({ state, seconds: oneSecond });
+	const timer = setTimeout(stateHandler, cycleTime);
 
-  const stateWatcher = createStateWatcher({ oneSecond, timer });
-  state.watch(stateWatcher);
+	const stateWatcher = createStateWatcher({ oneSecond, timer });
+	state.watch(stateWatcher);
 
-  return useTemplate(template);
+	return useTemplate(template);
 };
 
 const createStyles = () => ({
-  TimerApp: ({ css }: StyleParams) => css`
+	TimerApp: ({ css }: StyleParams) => css`
       display:flex;
       width:100%;
       justify-content:center;

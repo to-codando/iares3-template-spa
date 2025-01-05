@@ -8,13 +8,13 @@ type StyleParams = { css: TaggedStyle };
 type StyleHandler = () => GenericObject;
 type UseStyle = (styleHandler: StyleHandler) => Styles;
 type Params = {
-  useStyle: UseStyle;
+	useStyle: UseStyle;
 };
 
 export const DefaultApp = ({ useStyle }: Params) => {
-  useStyle(createStyles);
+	useStyle(createStyles);
 
-  return tsx`
+	return tsx`
   <div class="wrap">
     <h1>404</h1>
     <span>Página não encontrada</span>
@@ -24,7 +24,7 @@ export const DefaultApp = ({ useStyle }: Params) => {
 };
 
 const createStyles = () => ({
-  DefaultApp: ({ css }: StyleParams) => css`
+	DefaultApp: ({ css }: StyleParams) => css`
     display:flex;
     width:100%;
     padding:1em;
